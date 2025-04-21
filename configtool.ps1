@@ -5,3 +5,8 @@ Invoke-WebRequest -Uri $enlaceOriginal -OutFile "$env:TEMP\menu.ps1"
 Start-Process -FilePath "powershell.exe" `
     -ArgumentList "-ExecutionPolicy Bypass -File $env:TEMP\menu.ps1" `
     -WindowStyle Normal -Verb RunAs
+# Eliminar configtool.ps1 de la carpeta TEMP después de ejecutarse
+$scriptPath = "$env:TEMP\configtool.ps1"
+if (Test-Path $scriptPath) {
+    Remove-Item -Path $scriptPath -Force -ErrorAction SilentlyContinue
+}
